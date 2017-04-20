@@ -16,8 +16,12 @@ class ProviderList(generics.ListCreateAPIView):
     serializer_class = ProviderSerializer
     permission_classes = (IsAdminOrReadOnly, )
     lookup_url_kwarg = 'provider_id'
+	
+    def perform_create(self, serializer):
+        serializer.save(
+            created_by=self.request.user)
 
-class ProviderDetail(generics.RetrieveUpdateDestroyAPIView):
+class ProviderDetail(generics.RetrieveUpdateAPIView):
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
     permission_classes = (IsAdminOrReadOnly, )
@@ -37,7 +41,7 @@ class ProviderUpdateList(generics.ListCreateAPIView):
         provider = self.kwargs['provider_id']
         return ProviderUpdate.objects.filter(provider_id=provider)
 			
-class ProviderUpdateDetail(generics.RetrieveUpdateDestroyAPIView):
+class ProviderUpdateDetail(generics.RetrieveUpdateAPIView):
     serializer_class = ProviderUpdateSerializer
     permission_classes = (IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
     lookup_url_kwarg = 'providerupdate_id'
