@@ -39,7 +39,7 @@ class ProviderUpdateList(generics.ListCreateAPIView):
 			
     def get_queryset(self):
         provider = self.kwargs['provider_id']
-        return ProviderUpdate.objects.filter(provider_id=provider)
+        return ProviderUpdate.objects.filter(provider__id=provider)
 			
 class ProviderUpdateDetail(generics.RetrieveUpdateAPIView):
     serializer_class = ProviderUpdateSerializer
