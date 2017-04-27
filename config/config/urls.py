@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/', include('openref.urls',namespace='openref')),
     url(r'^api-token-auth/', obtain_auth_token),
+	
 ]

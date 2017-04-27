@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 	'rest_framework.authtoken',
 	'openref',
 	'reversion',
+	'widget_tweaks',
 ]
 
 MIDDLEWARE = [

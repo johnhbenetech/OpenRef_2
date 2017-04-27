@@ -1,6 +1,9 @@
 from django.http import HttpResponse
 from django.http import Http404
 
+from django.shortcuts import render
+from .filters import ProviderFilter
+
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -49,3 +52,8 @@ class ProviderUpdateDetail(generics.RetrieveUpdateAPIView):
     def get_queryset(self):
         providerupdate = self.kwargs['providerupdate_id']
         return ProviderUpdate.objects.filter(id=providerupdate)
+		
+def search(request):
+    provider_list = Provider.objects.all()
+    provider_filter = ProviderFilter(request.GET, queryset=provider_list)
+    return render(request, 'search/provider_list.html', {'filter': provider_filter})
