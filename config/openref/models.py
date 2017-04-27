@@ -28,11 +28,11 @@ class ProviderUpdate(models.Model):
         choices=STATUS_CHOICES,
         default=STATUS_NONE,
     )
-    provider = models.ForeignKey(Provider, related_name='updates')
+    provider = models.ForeignKey(Provider, related_name='updates',default=1)
     name = models.CharField(max_length=255)
     description = models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=20)
     created_by = models.ForeignKey(User)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-	
+    
